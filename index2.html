@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Pixels Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        .pixel {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: green;
+            animation: fireUp 10s backwards;
+        }
+        @keyframes fireUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createPixel() {
+            const pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            pixel.style.left = `${Math.random() * window.innerWidth}px`;
+            pixel.style.top = `${Math.random() * window.innerHeight}px`;
+            document.body.appendChild(pixel);
+            setTimeout(() => {
+                pixel.remove();
+            }, 1000);
+        }
+
+        function createPixels() {
+            for (let i = 0; i < 1000; i++) {
+                createPixel();
+            }
+        }
+
+        createPixels();
+        setInterval(createPixels, 5000);
+    </script>
+</body>
+</html>
